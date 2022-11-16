@@ -1,101 +1,734 @@
 ---
-title: "Title"
-subtitle: "&nbsp;"
+title: "Spatial Data"
 author: Rodney Dyer, PhD
-format: revealjs
+format: 
+  revealjs:
+    code-block-border-left: "#31BAE9"
+execute:
+  echo: true
 ---
 
+# Background {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
 
 
-# Transition {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
 
-## Bullets
+```{r}
+#| echo: false
+#| message: false
+#| error: false
+library( sf )
+library( ggplot2 )
+library( tidyverse )
+library( fontawesome )
+knitr::opts_chunk$set( fig.retina = 3, 
+                       warning = FALSE, 
+                       message = FALSE,
+                       fig.align="center")
 
-When you click the **Render** button a document will be generated that includes:
-
--   Content authored with markdown
--   Output from executable code
+theme_set( theme_classic( base_size = 20) )
+```
 
 
-## Two Columns Specified
+## &nbsp; {background-color="white" background-image="https://live.staticflickr.com/65535/50437121667_ac9c3e7f84_c_d.jpg" background-size="initial" background-position="center"}
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+Knight *et al.* (2005) [*Nature*](https://www.researchgate.net/deref/http%3A%2F%2Fdx.doi.org%2F10.1038%2Fnature03962).  **437**, 880-883.
+
+
+
+
+## Toblers First Law of Geography
+
+
+> Everything is related to everything else, but near things are more related to each other.^[[Tobler, W. R. 1970. *Economic Geography*, **46**, 234–240.](https://doi.org/10.1002/9781118786352.wbieg1011)]
+
+::: {.fragment}
+:::: {.columns}
+
+::: {.column width="50%"}
+### Physical Measurements
+- Location  
+
+- Distance  
+
+- Network  
+
+- Neighborhoods & Regions
+:::
+
+::: {.column width="50%"}
+### Emerging Properties 
+
+- Spatial Heterogeneity
+
+- Spatial Dependence  
+
+- Objects & Fields
+:::
+
+::::
+:::
+
+
+
+
+
+
+
+
+
+# Projections {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
+
+## A Projection
+
+A projection is a mathematical mapping of points measured on this surface of this earth that can be represented on things like computer screens.
+
+![Example](https://live.staticflickr.com/65535/50437002623_e8df5b3c9f_c_d.jpg) 
+
+
+
+
+
+
+
+
+# &nbsp; {background-color="#00013B" background-image="https://live.staticflickr.com/65535/50437046573_20efc64bdb_o_d.png" background-size="initial" background-position="right"}
+
+
+
+Earth == Lumpy <br>Bumpy Potato?
+
+
+&nbsp;
+
+&nbsp;
+
+
+Yes! &nbsp; &nbsp; &nbsp; - J. Ciminelli
+
+
+
+## Ellipsoids
+
+Models of the physical structure of the surface of the planet.  
+
+- NAD83/GRS80 - Satellite measurements of distance from core to surface of earth.  
+
+- WGS84 - Model built on global GPS system.
+
+
+
+
+## Example Data - Maps
+
+For these examples, I'm going to be using the `maps` library. 
+
+```{r}
+library( ggplot2 )
+library( maps )
+states <- map_data( "state" )
+head( states, n=500)
+```
+
+## Groups & States - Contiguity
+
+```{r}
+colSums( table( states$group, states$region ) > 0 ) 
+```
+
+
+
+
+## Example Data - Maps
+
+A basic map, notice the use of `group`.
+
+&nbsp;
+
+```{r}
+ggplot( states, aes(x=long, y=lat, group=group) ) + 
+  geom_polygon( fill="lightgray", color="black", lwd=0.25) + 
+  theme_void() -> p
+```
+
+&nbsp;
+
+This `groups_by()` for the purpose of plotting each individual polygon.
+
+
+## Azimuth Projections
 
 
 :::: {.columns}
 
 ::: {.column width="50%"}
-stuff
+Projected onto a 2-dimensional plane that is tangential to a single point on the surface of the earth (commonly  a pole, though not a necessity).
+
+![](https://live.staticflickr.com/65535/50437120363_d8e0686d38_w_d.jpg)
 :::
 
 ::: {.column width="50%"}
-::: {.fragment}
-stuff
-:::
+
+&nbsp; 
+
+```{r}
+p + coord_map( "azequalarea")
+```
 :::
 
 ::::
 
-## Some Title
 
-::: {layout-ncol="2"}
-### List One
 
--   Item A
--   Item B
--   Item C
+## Cylindrical Projections
 
-### List Two
+:::: {.columns}
 
--   Item X
--   Item Y
--   Item Z
-:::
+::: {.column width="50%"}
 
-## Another Slide
+&nbsp; 
 
-::: {layout-ncol="2"}
-### The code
-
-```{r eval=FALSE, echo=TRUE}
-hist( rnorm(1200) )
-```
-
-### The Plot
-
-```{r echo=FALSE}
-hist( rnorm( 1200 ) )
-```
-:::
-
-## And another slide
-
-::: {layout-ncol="2"}
--   Item X
--   Item Y
--   Item Z
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur gravida eu erat et fring. Morbi congue augue vel eros ullamcorper, eget convallis tortor sagittis. Fusce sodales viverra mauris a fringilla. Donec feugiat, justo eu blandit placerat, enim dui volutpat turpis, eu dictum lectus urna eu urna. Mauris sed massa ornare, interdum ipsum a, semper massa.
-:::
-
-## Code
-
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r echo=TRUE}
-px <- 0.75
-py <- 0.25
-m <- 0.1
-ret <- rep(NA,100)
-ret[1] <- py
-for( i in 2:100) {
-  ret[i] <- (1-m)*ret[(i-1)] + px * m   
-}
-```
-
-## Results
 
 ```{r}
-plot( ret, type="l")
+p + coord_map( "cylindrical" )
 ```
+:::
+
+::: {.column width="50%"}
+Parallels are straight lines and horizontal up and down the plot from latitude = 0
+
+![](https://live.staticflickr.com/65535/50437120498_8dd67df3f1_w_d.jpg)
+:::
+
+::::
+
+
+
+
+
+## Conic Projections
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Symmetric around the Prime Meridian and parallels are segments of concentric circles.
+
+![](https://live.staticflickr.com/65535/50437120428_6da48bed81_w_d.jpg)
+
+:::
+
+::: {.column width="50%"}
+
+&nbsp; 
+
+
+```{r}
+p + coord_map( "conic", lat0 = 30)
+```
+:::
+
+::::
+
+
+
+
+
+
+
+# Datum {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
+
+
+## Coordinate Systems 
+
+The *Datum* are the coordinate system used on the ellipsoid.  
+
+&nbsp;
+
+For **real** data, you *must* have a datum specified.
+
+
+## Longitude & Latitude
+
+The East/West & North/South position on the surface of the earth.
+
+  - Prime Meridian (0° Longitude) passes thorugh the [Royal Observatory](https://en.wikipedia.org/wiki/Royal_Observatory,_Greenwich) in Greenwich England, with positive values of longitude to the east and negative to the west.
+  
+  - Equator (0° Latitude) and is defined as the point on the planet where both northern and southern hemisphers have equal amounts of day and night at the [equinox](https://en.wikipedia.org/wiki/Equinox) (Sept. 21 & March 21).
+  
+  - Richmond, Virginia: 37.533333 Latitude, -77.466667 Longitude
+
+## Universal Trans Mercator 
+
+A division of the earth into 60 zones (~6°longitude each, labeled 01 - 60) and 20 bands each of which is ~8° latitude (labeled C-X excluding I & O with A & B dividing up Antartica).  See image [here](https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#/media/File:Universal_Transverse_Mercator_zones.svg).
+
+  - Coordinates include Zone & band designation as well as coordinates in Easting and Northing (planar coordinates within the zone) measured in meters.
+  
+  - Richmond, Virginia: 18S 282051 4156899
+
+
+
+
+
+
+## Dyer's First Law of Geospatial Analysis
+
+
+![](https://live.staticflickr.com/65535/52504818454_5d34b9151e_c_d.jpg){fig-align="center"}
+
+
+
+
+
+
+
+## Point Data {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
+
+
+## Beetle Data
+
+Back to our old friend, the Sonoran Desert bark beetle.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+*Araptus attenuatus*
+![](https://live.staticflickr.com/65535/50441339417_74e04216fa_w_d.jpg)
+:::
+
+::: {.column width="50%"}
+*Euphorbia lomelii*
+![](https://live.staticflickr.com/65535/50441175211_ba3b9df2ea_w_d.jpg)
+:::
+
+::::
+
+
+
+
+
+
+
+
+
+
+## Sampling Sites
+
+
+```{r}
+library( readr )
+url <- "https://raw.githubusercontent.com/dyerlab/ENVS-Lectures/master/data/Araptus_Disperal_Bias.csv"
+read_csv( url ) %>%
+  select( Site, Longitude, Latitude, 
+          Males, Females, Suitability ) %>%
+  arrange( Latitude ) -> data 
+summary( data )
+```
+
+
+## A Simple Map - Leaflet
+
+
+
+
+The `leaflet` library allows you to make quick, interactive maps.
+
+```{r}
+data %>%
+  mutate( Label = paste( "Site:", Site, 
+                         "<hr>\nFemales:", Females, 
+                         "<br>Males: ", Males,
+                         "<br>Suitability:", Suitability) ) -> df
+
+head(df)
+```
+
+
+
+## Leaflet Map
+
+```{r}
+library( leaflet )
+df %>%
+  leaflet() %>%
+  addMarkers( ~Longitude, ~Latitude, popup = ~Label ) %>%
+  addProviderTiles( "OpenTopoMap" )
+```
+
+
+
+
+
+
+
+## The Simple Features (`sf`) library.
+
+
+*Simple Features** are an open standard developed by the Open Geospatial Consortium ([OGC](https://ogc.org)).  They define the following basic types:
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+### Basic Geometry Types
+
+- POINT  
+
+- LINESTRING
+
+- POLYGON  
+:::
+
+::: {.column width="50%"}
+### Corresponding 'multi' versions
+
+-  MULTIPOINT
+
+- MULTILINESTRING
+
+- MULTIPOLYGON
+
+- GEOMETRYCOLLECTION
+:::
+
+::::
+
+:::{.fragment}
+Each of these basic types can be represented within a `data.frame` as a normal data object.
+:::
+
+
+
+## Setting `sf` objects
+
+To convert from a normal `data.frame` with columns of numerical values to an `sf` object, you **must** indicate:   
+- Names of the `x` and `y` coordinates, and    
+- A reference to the Coordinate Reference System
+
+```{r}
+data %>% 
+  st_as_sf( coords=c("Longitude","Latitude"), crs=4326 ) -> data
+head( data )
+```
+
+
+
+
+
+## &nbsp; {background-color="white" background-image="https://live.staticflickr.com/65535/50445538736_bc1c3456e5_k_d.jpg" background-size="initial" background-position="center"}
+
+
+
+
+## Reprojecting Points
+
+We can reproject data (that **already** has a coordinate reference system) into any other projection.
+
+```{r}
+data %>%
+  st_transform( 6372 ) %>%
+  st_bbox()
+```
+
+
+
+## Wait, What?
+
+> What is that 6372 EPSG thing you just mentioned?
+
+
+[EPGS.io](https://epsg.io/6372)
+
+
+
+## Plotting `sf` <br/> Objects {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
+
+
+
+##  &nbsp;
+
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+Eash of the data columns are associated with the `geometry` column we made.  If we plot the whole `data.frame`, it makes replicate plots of each data column displayed in the coordinate space of the `geometry`.
+
+- Color will represent gradient in values for each plot.
+
+- Normal `plot()` parameters can be used to customize.
+:::
+
+::: {.column width="50%"}
+```{r}
+plot( data , pch=16, cex=2)
+```
+:::
+
+::::
+
+
+
+## Linked data and `geometry`
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r, fig.width=6, fig.height=6}
+plot( data$Suitability, pch=16, cex=2, bty="n" )
+```
+:::
+
+::: {.column width="50%"}
+```{r, fig.width=6, fig.height=6}
+plot( data["Suitability"], pch=16, cex=2)
+```
+:::
+
+::::
+
+
+
+## Hello `ggplot` My Old Friend
+
+```{r fig.width=6, fig.height=6}
+ggplot( data ) + geom_sf( aes(size=Suitability) ) 
+```
+
+
+
+
+
+## &nbsp;
+:::: {.columns}
+
+::: {.column width="50%"}
+### GGPlot and Labels
+
+
+```{r eval=FALSE}
+ggplot( data ) + 
+  geom_sf_label( aes(label=Site)) + 
+  theme_void() + 
+  coord_map()
+```
+
+:::
+
+::: {.column width="50%"}
+```{r echo=FALSE}
+ggplot( data ) + 
+  geom_sf_text( aes(label=Site)) + 
+  theme_void() + 
+  coord_map()
+```
+:::
+
+::::
+
+
+
+
+## Map Overlays 🗺 {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
+
+## Maps
+
+
+As with other `ggplot` activities, we can mix the data being plot by changing `data` and `aes` mappings.
+:::: {.columns}
+
+::: {.column width="50%"}
+Grab the Mexico map data like before.
+
+```{r eval=FALSE}
+map_data("world") %>%
+  filter( region == "Mexico") -> map
+
+ggplot( ) + 
+  geom_polygon( aes( x=long, 
+                     y=lat, 
+                     group=group ), 
+                data=map, 
+                fill="grey" ) + 
+  geom_sf( data=data, 
+           aes(color=Suitability), 
+           size=2) +
+  xlab("Longitude") + 
+  ylab("Latitude") + 
+  theme_bw( base_size = 12 ) +
+  coord_sf( xlim = c(-115, -105),
+            ylim = c(20, 30) )
+```
+
+:::
+
+::: {.column width="50%"}
+```{r echo=FALSE, fig.width=6, fig.height=6}
+bbox <- st_bbox( data )
+map_data("world") %>%
+  filter( region == "Mexico") -> map
+ggplot( ) + 
+  geom_polygon( aes(x=long, y=lat, group=group), 
+                data=map, 
+                fill="grey" ) + 
+  geom_sf( data=data, 
+           aes(color=Suitability), 
+           size=2) +
+  xlab("Longitude") + 
+  ylab("Latitude") + 
+  theme_bw( base_size = 12 ) +
+  coord_sf( xlim = c(-115, -105),
+            ylim = c(20, 30) )
+```
+:::
+
+::::
+
+
+
+
+
+
+## Natural Earth
+
+
+Loading `sf` object for background map from `naturalearth` libraries and then plotting.  *Notice:* `xlim` and `ylim` are configured withing `coord_sf()`.
+
+
+
+```{r eval=FALSE}
+library( rnaturalearth )
+library( rnaturalearthdata )
+
+world <- ne_countries( scale = "medium", returnclass = "sf")
+
+ggplot() + 
+  geom_sf( data=world ) + 
+  geom_sf( data=data, 
+           aes(color=Suitability)) +
+  coord_sf( xlim = c(-115, -105),
+            ylim = c(20, 30) ) + 
+  xlab("Longitude") + 
+  ylab("Latitude") + 
+  theme( axis.text.x=element_text( angle=45,  
+                                   hjust=1) )
+```
+
+
+## Natural Earth
+
+```{r echo=FALSE}
+library( rnaturalearth )
+library( rnaturalearthdata )
+world <- ne_countries( scale = "medium", returnclass = "sf")
+ggplot() + 
+  geom_sf( data=world ) + 
+  geom_sf( data=data, aes(color=Suitability), size=2) +
+  coord_sf( xlim = c(-115, -105),
+            ylim = c(20, 30) )  + 
+  xlab("Longitude") + 
+  ylab("Latitude") + 
+  theme(axis.text.x=element_text(angle=45, hjust=1))
+```
+
+
+
+
+
+
+
+
+
+# Spatial Operations {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
+
+
+## Answering Questions Easily
+
+Once the data are in `sf` features, we can leverage tidyverse and spatial functions to *easily* get information from the data.  Think of this as a tidyverse implementation of the `Spatial Analysis Toolbox` without all the menus and buttons.
+
+Here are some examples.
+
+
+## Geospatial Operations 
+
+*What are the bounding coordinates for all samplikng locations (aka bounding box)?*
+
+:::{.fragment}
+```{r}
+data %>% 
+  st_bbox()
+```
+:::
+
+
+
+## Geospatial Operations 
+
+*Create a polygon with minimal area that encompasses all the sampling locations (aka convex hull).*
+
+:::{.fragment}
+```{r}
+data %>% 
+  st_union() %>% 
+  st_convex_hull() -> hull
+```
+:::
+
+## Geospatial Operations 
+
+*Where is the center of all the sampling locations?*
+
+:::{.fragment}
+```{r}
+hull %>%
+  st_centroid()
+```
+:::
+
+
+## Geospatial Operations 
+
+*How much area is encompassed by all the points for these sampling locations (in km^2)?*
+
+:::{.fragment}
+```{r}
+library( units )
+hull %>%
+  st_area() %>%
+  set_units( km^2 )
+```
+:::
+
+
+
+
+
+
+
+
 
 ## Questions
 

@@ -1,4 +1,4 @@
-# Topic Title
+# Spatial Point Data
 
 
 ## Impetus
@@ -8,9 +8,11 @@ This is a description of the basic template file for a course component reposito
 ## Student Learning Objectives
 
 At the end of this topic, you should be able to:  
- - *Learning Objective 1* 
- - *Learning Objective 2*
- - *Learning Objective 3* 
+
+- Describe the importance of Ellipsoids & Datum in spatial data.
+- Use both `sf` & `ggplot` in visualizing point data.  
+- Be able to transform point data from one projection to another.
+- Easily create static and dynamic maps from point data.
 
 ## Content
  - [Slides](slides.html)
