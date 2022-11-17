@@ -15,10 +15,10 @@ At the end of this topic, you should be able to:
 - Easily create static and dynamic maps from point data.
 
 ## Content
- - [Slides](slides.html)
- - [Narrative](narrative.html)
- - [In Class](in-class.html)
- - Data Set
+ - The [slides](slides.html) for this topic.
+ - A longer [narrative](narrative.html) going in more depth on the slide content.
+ - The [in-class](in-class.html) activity.
+ - An `sf` [cheat sheet](https://github.com/rstudio/cheatsheets/raw/main/sf.pdf)
 
 ## Contact Information
 
