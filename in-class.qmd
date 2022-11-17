@@ -80,7 +80,7 @@ For these questions, you may want to look at the `sf` cheat sheet [here](https:/
 
 1. How far apart (in km) are the sites Constitución (`const`) and San Francisquito (`sfran`)?  
 
-2. Is there a correlation between habitat suitability and the ratio of males to female beetles?  
+2. Is there a correlation between habitat suitability and the ratio of males to female beetles sampled at each locale?  
 
 3. Make a plot using `ggplot` of the data with suitability as the size of the points and the sex ratio as the fill color.
 
