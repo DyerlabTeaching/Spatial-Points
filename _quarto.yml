@@ -1,5 +1,5 @@
 project:
-  title: "Dyerlab-Template"
+  title: "Spatial Points"
   output-dir: docs
 
 format:
@@ -13,6 +13,7 @@ format:
     citations-hover: true
     footnotes-hover: true
     link-external-icon: true
+    css: boxes.css
   revealjs:
     self-contained: true
     code-fold: false
