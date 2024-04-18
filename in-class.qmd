@@ -86,3 +86,20 @@ For these questions, you may want to look at the `sf` cheat sheet [here](https:/
 
 4. Reproject the data and plot it again using an EPSG code defined for Mexico UTM zone 12N (see [epgs.io](https://epsg.io) for projections).
 
+
+
+```{r}
+#| echo: false
+cor.response <- cor.test( iris$Petal.Length, iris$Sepal.Width)
+```
+
+
+We failed to find a significant relationship between sepal length and width (Pearson Correlation, $\rho$ = `r cor.response$estimate`, P = `r cor.response$p.value`).
+
+
+
+
+
+
+
+
