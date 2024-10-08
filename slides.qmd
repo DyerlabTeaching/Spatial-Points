@@ -58,7 +58,7 @@ Knight *et al.* (2005) [*Nature*](https://www.researchgate.net/deref/http%3A%2F%
 
 
 
-## Toblers First Law of Geography
+## Toblers First Law of Geography {.smaller}
 
 
 > Everything is related to everything else, but near things are more related to each other.^[[Tobler, W. R. 1970. *Economic Geography*, **46**, 234–240.](https://doi.org/10.1002/9781118786352.wbieg1011)]
@@ -104,7 +104,7 @@ Knight *et al.* (2005) [*Nature*](https://www.researchgate.net/deref/http%3A%2F%
 
 A projection is a mathematical mapping of points measured on this surface of this earth that can be represented on things like computer screens.
 
-![Example](https://live.staticflickr.com/65535/50437002623_e8df5b3c9f_c_d.jpg) 
+![](https://live.staticflickr.com/65535/50437002623_e8df5b3c9f_c_d.jpg) 
 
 
 
@@ -273,11 +273,15 @@ For **real** data, you *must* have a datum specified.
 
 The East/West & North/South position on the surface of the earth.
 
+::: {.incremental}
+
   - Prime Meridian (0° Longitude) passes thorugh the [Royal Observatory](https://en.wikipedia.org/wiki/Royal_Observatory,_Greenwich) in Greenwich England, with positive values of longitude to the east and negative to the west.
   
   - Equator (0° Latitude) and is defined as the point on the planet where both northern and southern hemisphers have equal amounts of day and night at the [equinox](https://en.wikipedia.org/wiki/Equinox) (Sept. 21 & March 21).
   
-  - Richmond, Virginia: 37.533333 Latitude, -77.466667 Longitude
+  - Richmond, Virginia: `37.53°Lat, -77.47°Lon`
+
+:::
 
 ## Universal Trans Mercator 
 
@@ -352,7 +356,7 @@ summary( data )
 
 
 
-The `leaflet` library allows you to make quick, interactive maps.
+The `leaflet` library allows you to make quick, interactive maps.  Here I also add a message that we will use to present to the user in the web interface when they click on a location.  
 
 ```{r}
 data %>%
@@ -360,9 +364,21 @@ data %>%
                          "<hr>\nFemales:", Females, 
                          "<br>Males: ", Males,
                          "<br>Suitability:", Suitability) ) -> df
-
-head(df)
 ```
+
+
+## The Data 
+
+&nbsp;
+
+This is HTML markup where `<hr>` makes a horizontal line and `<br>` makes a line break (with no extra space like you see between paragraphs).
+
+&nbsp;
+
+```{r}
+head(df$Label)
+```
+
 
 
 
@@ -385,8 +401,11 @@ df %>%
 ## The Simple Features (`sf`) library.
 
 
-*Simple Features** are an open standard developed by the Open Geospatial Consortium ([OGC](https://ogc.org)).  They define the following basic types:
+*Simple Features* are an open standard developed by the Open Geospatial Consortium ([OGC](https://ogc.org)).  They define the basic types we use in geospatial analyses.
 
+
+
+## &nbsp; 
 
 :::: {.columns}
 
@@ -430,6 +449,13 @@ To convert from a normal `data.frame` with columns of numerical values to an `sf
 ```{r}
 data %>% 
   st_as_sf( coords=c("Longitude","Latitude"), crs=4326 ) -> data
+```
+
+
+
+## The Data
+
+```{r}
 head( data )
 ```
 
@@ -467,7 +493,7 @@ data %>%
 
 
 
-##  &nbsp;
+##  &nbsp; {.smaller}
 
 
 
@@ -494,21 +520,17 @@ plot( data , pch=16, cex=2)
 ## Linked data and `geometry`
 
 
-:::: {.columns}
 
-::: {.column width="50%"}
 ```{r, fig.width=6, fig.height=6}
 plot( data$Suitability, pch=16, cex=2, bty="n" )
 ```
-:::
 
-::: {.column width="50%"}
+
+## Linked data and `geometry`
+
 ```{r, fig.width=6, fig.height=6}
 plot( data["Suitability"], pch=16, cex=2)
 ```
-:::
-
-::::
 
 
 
@@ -522,47 +544,25 @@ ggplot( data ) + geom_sf( aes(size=Suitability) )
 
 
 
-## &nbsp;
-:::: {.columns}
+## GGPlot and Labels {.smaller}
 
-::: {.column width="50%"}
-### GGPlot and Labels
-
-
-```{r eval=FALSE}
-ggplot( data ) + 
-  geom_sf_label( aes(label=Site)) + 
-  theme_void() + 
-  coord_map()
+```{r}
+ggplot( data ) +  geom_sf_label( aes(label=Site)) + coord_map() + theme_void()
 ```
-
-:::
-
-::: {.column width="50%"}
-```{r echo=FALSE}
-ggplot( data ) + 
-  geom_sf_text( aes(label=Site)) + 
-  theme_void() + 
-  coord_map()
-```
-:::
-
-::::
 
 
 
 
 ## Map Overlays 🗺 {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
 
-## Maps
+## Maps { .smaller }
 
 
 As with other `ggplot` activities, we can mix the data being plot by changing `data` and `aes` mappings.
-:::: {.columns}
+
 
 ::: {.column width="50%"}
-Grab the Mexico map data like before.
-
+&nbsp;
 ```{r eval=FALSE}
 map_data("world") %>%
   filter( region == "Mexico") -> map
@@ -582,7 +582,6 @@ ggplot( ) +
   coord_sf( xlim = c(-115, -105),
             ylim = c(20, 30) )
 ```
-
 :::
 
 ::: {.column width="50%"}
@@ -604,8 +603,6 @@ ggplot( ) +
             ylim = c(20, 30) )
 ```
 :::
-
-::::
 
 
 
