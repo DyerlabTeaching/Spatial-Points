@@ -218,8 +218,8 @@ As part of some work that we have done on these species, we have looked at the r
 
 ```{r}
 url <- "https://raw.githubusercontent.com/dyerlab/ENVS-Lectures/master/data/Araptus_Disperal_Bias.csv"
-read_csv( url ) %>%
-  select( Site, Longitude, Latitude, everything() ) %>%
+read_csv( url ) |>
+  select( Site, Longitude, Latitude, everything() ) |>
   arrange( Latitude ) -> data 
 summary( data )
 ```
@@ -228,7 +228,7 @@ We can plot these points using the normal `ggplot` functions (map overlays below
 
 ```{r}
 library(ggrepel)
-data %>%
+data |>
   ggplot( aes( Longitude, Latitude ) ) + 
   geom_label_repel( aes(label=Site) ) + 
   coord_map()
@@ -238,13 +238,13 @@ We can also plot these locations and fill in some interpretive data using the `l
 
 ```{r message=FALSE, warning=FALSE}
 library( leaflet )
-data %>%
+data |>
   mutate( Label = paste( "<b>Site:", Site, 
                          "</b><hr>\nFemales:", Females, 
                          "<br>Males: ", Males,
-                         "<br>Suitability:", Suitability) ) %>%
-  leaflet() %>%
-  addMarkers( ~Longitude, ~Latitude, popup = ~Label ) %>%
+                         "<br>Suitability:", Suitability) ) |>
+  leaflet() |>
+  addMarkers( ~Longitude, ~Latitude, popup = ~Label ) |>
   addProviderTiles( "OpenTopoMap" )
 ```
 Make sure to click on one of the markers and see the popup information that we added *en route* via that mutate and some HTML code.
@@ -267,7 +267,7 @@ Each of these basic types can be represented within a single column of a `data.f
 
 ```{r}
 library( sf )
-data %>%
+data |>
   st_as_sf( coords=c("Longitude","Latitude"),
             crs = 4326 ) -> data
 head( data )
@@ -294,8 +294,8 @@ st_distance( data[1,], data[2,])
 As well as complex geospatial operations such as finding the convex hull (the minimal area containing all poitns).
 
 ```{r}
-data %>%
-  st_union() %>%
+data |>
+  st_union() |>
   st_convex_hull() -> hull
 hull
 ```
@@ -303,7 +303,7 @@ hull
 the center of the all the points.
 
 ```{r}
-hull %>%
+hull |>
   st_centroid()
 ```
 
@@ -311,8 +311,8 @@ and the area enclosed by all the points (for various units).
 
 ```{r}
 library( units )
-hull %>%
-  st_area() %>%
+hull |>
+  st_area() |>
   set_units( km^2 )
 ```
 
@@ -322,8 +322,8 @@ hull %>%
 In addition to the operations above, properly created `sf` objects can easily be projected from one CRS into another (epsg 6372 is a common projection covering  Mexico based upon the GRS80 elipsoid and the latest ITRF2008 datum standard based on the meter)[^4].
 
 ```{r}
-data %>%
-  st_transform( 6372 ) %>%
+data |>
+  st_transform( 6372 ) |>
   st_bbox()
 ```
 
@@ -377,7 +377,7 @@ We can go out and grab a map background to overlay these plots onto, giving more
 The `map_data()` function is part of `ggplot()` and produces a `data.frame` object where each row is a coordinate used to draw polygons (see [narrative](https://dyerlab.github.io/ENVS-Lectures/spatial/spatial_polygons/narrative.nb.html) on polygons for more information).
 
 ```{r}
-map_data("world") %>%
+map_data("world") |>
   filter( region == "Mexico") -> map
 head( map )
 ```

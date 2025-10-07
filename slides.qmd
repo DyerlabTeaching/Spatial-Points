@@ -1,9 +1,7 @@
 ---
 title: "Spatial Data"
 author: Rodney Dyer, PhD
-format: 
-  revealjs:
-    code-block-border-left: "#31BAE9"
+format: revealjs
 execute:
   echo: true
 ---
@@ -343,9 +341,9 @@ Back to our old friend, the Sonoran Desert bark beetle.
 ```{r}
 library( readr )
 url <- "https://raw.githubusercontent.com/dyerlab/ENVS-Lectures/master/data/Araptus_Disperal_Bias.csv"
-read_csv( url ) %>%
+read_csv( url ) |>
   select( Site, Longitude, Latitude, 
-          Males, Females, Suitability ) %>%
+          Males, Females, Suitability ) |>
   arrange( Latitude ) -> data 
 summary( data )
 ```
@@ -359,7 +357,7 @@ summary( data )
 The `leaflet` library allows you to make quick, interactive maps.  Here I also add a message that we will use to present to the user in the web interface when they click on a location.  
 
 ```{r}
-data %>%
+data |>
   mutate( Label = paste( "Site:", Site, 
                          "<hr>\nFemales:", Females, 
                          "<br>Males: ", Males,
@@ -386,9 +384,9 @@ head(df$Label)
 
 ```{r}
 library( leaflet )
-df %>%
-  leaflet() %>%
-  addMarkers( ~Longitude, ~Latitude, popup = ~Label ) %>%
+df |>
+  leaflet() |>
+  addMarkers( ~Longitude, ~Latitude, popup = ~Label ) |>
   addProviderTiles( "OpenTopoMap" )
 ```
 
@@ -447,7 +445,7 @@ To convert from a normal `data.frame` with columns of numerical values to an `sf
 - A reference to the Coordinate Reference System
 
 ```{r}
-data %>% 
+data |> 
   st_as_sf( coords=c("Longitude","Latitude"), crs=4326 ) -> data
 ```
 
@@ -473,8 +471,8 @@ head( data )
 We can reproject data (that **already** has a coordinate reference system) into any other projection.
 
 ```{r}
-data %>%
-  st_transform( 6372 ) %>%
+data |>
+  st_transform( 6372 ) |>
   st_bbox()
 ```
 
@@ -564,7 +562,7 @@ As with other `ggplot` activities, we can mix the data being plot by changing `d
 ::: {.column width="50%"}
 &nbsp;
 ```{r eval=FALSE}
-map_data("world") %>%
+map_data("world") |>
   filter( region == "Mexico") -> map
 
 ggplot( ) + 
@@ -587,7 +585,7 @@ ggplot( ) +
 ::: {.column width="50%"}
 ```{r echo=FALSE, fig.width=6, fig.height=6}
 bbox <- st_bbox( data )
-map_data("world") %>%
+map_data("world") |>
   filter( region == "Mexico") -> map
 ggplot( ) + 
   geom_polygon( aes(x=long, y=lat, group=group), 
@@ -671,11 +669,11 @@ Here are some examples.
 
 ## Geospatial Operations 
 
-*What are the bounding coordinates for all samplikng locations (aka bounding box)?*
+*What are the bounding coordinates for all sampling locations (aka bounding box)?*
 
 :::{.fragment}
 ```{r}
-data %>% 
+data |> 
   st_bbox()
 ```
 :::
@@ -688,8 +686,8 @@ data %>%
 
 :::{.fragment}
 ```{r}
-data %>% 
-  st_union() %>% 
+data |> 
+  st_union() |> 
   st_convex_hull() -> hull
 ```
 :::
@@ -700,7 +698,7 @@ data %>%
 
 :::{.fragment}
 ```{r}
-hull %>%
+hull |>
   st_centroid()
 ```
 :::
@@ -713,8 +711,8 @@ hull %>%
 :::{.fragment}
 ```{r}
 library( units )
-hull %>%
-  st_area() %>%
+hull |>
+  st_area() |>
   set_units( km^2 )
 ```
 :::

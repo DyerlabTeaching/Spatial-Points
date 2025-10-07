@@ -11,7 +11,7 @@ format:
 </center>
 
 
-This homework is a bit quick but is designed to make sure that:
+This is a bit quick but is designed to make sure that:
 
 1. To make sure everyone can get their computer up-to-date with the proper set of libraries so that we can work with geospatial data, and
 2. Give you some practice turning normal numerical data into geospatial coordinates and performing basic operations.
@@ -21,11 +21,10 @@ This homework is a bit quick but is designed to make sure that:
 The following code defines the set of necessary libraries for the next few weeks and then figures out which (potential) subset you need to install. It then installs them all in one call.  It will not load them into your session, you'll have to do that later in your code chunks.
 
 ```{r}
+#| eval: false 
 needed_libraries <- c("sf",
                       "maps",
                       "units",
-                      "rgdal",
-                      "rgeos",
                       "GGally",
                       "raster",
                       "mapproj",
@@ -86,15 +85,6 @@ For these questions, you may want to look at the `sf` cheat sheet [here](https:/
 
 4. Reproject the data and plot it again using an EPSG code defined for Mexico UTM zone 12N (see [epgs.io](https://epsg.io) for projections).
 
-
-
-```{r}
-#| echo: false
-cor.response <- cor.test( iris$Petal.Length, iris$Sepal.Width)
-```
-
-
-We failed to find a significant relationship between sepal length and width (Pearson Correlation, $\rho$ = `r cor.response$estimate`, P = `r cor.response$p.value`).
 
 
 
