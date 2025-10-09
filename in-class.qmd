@@ -49,7 +49,11 @@ if( length( need_inst ) ) {
 The data for this is some site-level data from the Sonoran Desert bark beetle.  The URL is in the next chunk, and is currently being hosted on my class [Github repository](https://github.com/dyerlab/ENVS-Lectures).  Load it in.
 
 ```{r}
+library( tidyverse )
 url <- "https://raw.githubusercontent.com/dyerlab/ENVS-Lectures/master/data/Araptus_Disperal_Bias.csv"
+read_csv( url ) -> data 
+
+summary( data )
 ```
 
 
@@ -61,6 +65,15 @@ There is a great tutorial [here](https://rstudio.github.io/leaflet/map_widget.ht
 
 ```{r}
 # make a quick leaflet map here to get an idea of 
+
+library( leaflet )
+
+data |> 
+  leaflet() |> 
+  addMarkers( ~Longitude, ~Latitude ) |>
+  addTiles()
+
+
 ```
 
 ### Converting to `sf` Objects
@@ -70,6 +83,13 @@ Convert the spatial data in the beetle data.frame into an `sf` object.  Make sur
 
 ```{r}
 # convert raw data to simple features in your data.frame
+library( sf )
+
+data |>
+  st_as_sf(coords = c("Longitude","Latitude"), crs=4326 ) -> data 
+
+head( data )
+
 ```
 
 
@@ -79,9 +99,33 @@ For these questions, you may want to look at the `sf` cheat sheet [here](https:/
 
 1. How far apart (in km) are the sites Constitución (`const`) and San Francisquito (`sfran`)?  
 
+```{r}
+library( units )
+
+data |> 
+  filter( Site %in% c("const", "sfran" ) ) |>
+  st_distance() |>
+  set_units( km ) -> pw 
+
+distConstSFran <- format( as.numeric( pw[2,1] ), digits=4 )
+
+```
+
+My sampling locations were `r distConstSFran` km apart.
+
+
 2. Is there a correlation between habitat suitability and the ratio of males to female beetles sampled at each locale?  
 
 3. Make a plot using `ggplot` of the data with suitability as the size of the points and the sex ratio as the fill color.
+
+```{r}
+data |>
+  ggplot( aes( size=Suitability, color = MFRatio ) ) + 
+  geom_sf() + 
+  theme_minimal()
+```
+
+
 
 4. Reproject the data and plot it again using an EPSG code defined for Mexico UTM zone 12N (see [epgs.io](https://epsg.io) for projections).
 
