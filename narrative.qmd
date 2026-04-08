@@ -23,16 +23,6 @@ library( tidyverse )
 ![Baja California](https://live.staticflickr.com/65535/50504854173_2080b28f87_c_d.jpg)
 </center>
 
-## Learning Objectives
-
-This topics is the first 
-
-- Describe the importance of Ellipsoids & Datum in spatial data.  
-
-- Use both `sf` & `ggplot` in visualizing point data.
-
-- Be able to transform point data from one projection to another.
-
 
 ## Ellipsoids
 
