@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="narrative_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="narrative_files/libs/quarto-html/anchor.min.js"></script>
 <link href="narrative_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="narrative_files/libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="narrative_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="narrative_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="narrative_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="narrative_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -137,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✔ dplyr     1.2.1     ✔ readr     2.2.0
 ✔ forcats   1.0.1     ✔ stringr   1.6.0
 ✔ lubridate 1.9.5     ✔ tibble    3.3.1
-✔ purrr     1.2.1     ✔ tidyr     1.3.2</code></pre>
+✔ purrr     1.2.2     ✔ tidyr     1.3.2</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -338,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 6 -87.58806 30.32665     1     6 alabama      &lt;NA&gt;</code></pre>
 </div>
 </div>
-<p>Each row is a point that is associated with a group (in this case the state) and is plot in a specific order (to make the outline of the state). There are 15,537 points required to make the plot, with the following 49 regions.</p>
+<p>Each row is a point that is associated with a group (in this case the state) and is plotted in a specific order (to make the outline of the state). There are 15,537 points required to make the plot, with the following 49 regions.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>( states<span class="sc">$</span>region )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -375,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="azimuth-projections" class="level3">
 <h3 class="anchored" data-anchor-id="azimuth-projections">Azimuth Projections</h3>
-<p>An Azimuth Projection is one that is formed by a 2-dimensional plane that is tangential to the surface of the earth at example one point. This point may be polar (north or south pole) or oblique (e.g., over Richmond, Virginia).</p>
+<p>An Azimuth Projection is one that is formed by a 2-dimensional plane that is tangential to the surface of the earth at exactly one point. This point may be polar (north or south pole) or oblique (e.g., over Richmond, Virginia).</p>
 <center>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -384,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </center>
-<p>We can apply different ellipsoids to the map <em>when we plot it</em> by adjusting the coordinate space it is plot within using the <code>coord_map()</code> modification. For a whole list of available projections, see <code>?mapproject</code>.</p>
+<p>We can apply different ellipsoids to the map <em>when we plot it</em> by adjusting the coordinate space it is plotted within using the <code>coord_map()</code> modification. For a whole list of available projections, see <code>?mapproject</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">coord_map</span>( <span class="st">"azequalarea"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -420,7 +420,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="conic-projections" class="level3">
 <h3 class="anchored" data-anchor-id="conic-projections">Conic Projections</h3>
-<p>Conic projections are symmetric around the prime meridian and all parallels are segments of conecntric circles.</p>
+<p>Conic projections are symmetric around the prime meridian and all parallels are segments of concentric circles.</p>
 <center>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -443,15 +443,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="datum" class="level2">
 <h2 class="anchored" data-anchor-id="datum">Datum</h2>
-<p>Once we have an ellipsoid model to work with we must define a <em>DATUM</em> type that will represent the coordiante system used. Two common DATUM types include:</p>
+<p>Once we have an ellipsoid model to work with we must define a <em>DATUM</em> type that will represent the coordinate system used. Two common DATUM types include:</p>
 <ul>
 <li><em>Longitude &amp; Latitude</em> - The East/West &amp; North/South position on the surface of the earth.
 <ul>
-<li>Prime Meridian (0° Longitude) passes thorugh the <a href="https://en.wikipedia.org/wiki/Royal_Observatory,_Greenwich">Royal Observatory</a> in Greenwich England, with positive values of longitude to the east and negative to the west.</li>
-<li>Equator (0° Latitude) and is defined as the point on the planet where both northern and southern hemisphers have equal amounts of day and night at the <a href="https://en.wikipedia.org/wiki/Equinox">equinox</a> (Sept.&nbsp;21 &amp; March 21).</li>
+<li>Prime Meridian (0° Longitude) passes through the <a href="https://en.wikipedia.org/wiki/Royal_Observatory,_Greenwich">Royal Observatory</a> in Greenwich England, with positive values of longitude to the east and negative to the west.</li>
+<li>Equator (0° Latitude) is defined as the point on the planet where both northern and southern hemispheres have equal amounts of day and night at the <a href="https://en.wikipedia.org/wiki/Equinox">equinox</a> (Sept.&nbsp;21 &amp; March 21).</li>
 <li>Richmond, Virginia: 37.533333 Latitude, -77.466667 Longitude</li>
 </ul></li>
-<li><em>Universal Trans Mercator</em> - A division of the earth into 60 zones (~6°longitude each, labeled 01 - 60) and 20 bands each of which is ~8° latitude (labeled C-X excluding I &amp; O with A &amp; B dividing up Antartica). See image <a href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#/media/File:Universal_Transverse_Mercator_zones.svg">here</a>.
+<li><em>Universal Transverse Mercator</em> - A division of the earth into 60 zones (~6°longitude each, labeled 01 - 60) and 20 bands each of which is ~8° latitude (labeled C-X excluding I &amp; O with A &amp; B dividing up Antarctica). See image <a href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#/media/File:Universal_Transverse_Mercator_zones.svg">here</a>.
 <ul>
 <li>Coordinates include Zone &amp; band designation as well as coordinates in Easting and Northing (planar coordinates within the zone) measured in meters.</li>
 <li>Richmond, Virginia: 18S 282051 4156899</li>
@@ -483,7 +483,7 @@ You <strong>must</strong> set both the ellipsoid and datum to be <strong>EXACTLY
 <figcaption>epsg.io</figcaption>
 </figure>
 </div>
-<p>The EPSG Geodetic Parameter Dataset (also known as the EPGS<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> registry) is a publc registry of datums, spatial reference systems, and earth elipsoids. Each item is assigned a specific EPSG code</p>
+<p>The EPSG Geodetic Parameter Dataset (also known as the EPSG<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> registry) is a public registry of datums, spatial reference systems, and earth ellipsoids. Each item is assigned a specific EPSG code.</p>
 <p>The precise definitions of projections come in several different formats, some of which include:</p>
 <p><tt>Well Known Text (WKT)</tt></p>
 <pre><code>GEOGCS["WGS 84",
@@ -539,7 +539,7 @@ Always let the underlying software make any changes to projection information. T
 </td>
 </tr>
 </tbody></table>
-<p>As part of some work that we have done on these species, we have looked at the relationship between habitat suitability and sex ratio bias. The life history for this beetle is such that males will establish home by burrowing in the senescing tissues of the host plant. Once established, feamles are attracted via phermones.</p>
+<p>As part of some work that we have done on these species, we have looked at the relationship between habitat suitability and sex ratio bias. The life history for this beetle is such that males will establish a home by burrowing in the senescing tissues of the host plant. Once established, females are attracted via pheromones.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/dyerlab/ENVS-Lectures/master/data/Araptus_Disperal_Bias.csv"</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>( url ) <span class="sc">|&gt;</span></span>
@@ -557,13 +557,13 @@ dbl (8): Males, Females, Suitability, MFRatio, GenVarArapat, GenVarEuphli, L...
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>( data )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     Site             Longitude         Latitude         Males      
- Length:31          Min.   :-114.3   Min.   :23.29   Min.   : 9.00  
- Class :character   1st Qu.:-113.1   1st Qu.:24.95   1st Qu.:16.00  
- Mode  :character   Median :-112.0   Median :26.64   Median :21.00  
-                    Mean   :-112.0   Mean   :26.44   Mean   :25.68  
-                    3rd Qu.:-110.8   3rd Qu.:27.78   3rd Qu.:31.50  
-                    Max.   :-109.3   Max.   :29.33   Max.   :64.00  
+<pre><code>        Site      Longitude         Latitude         Males      
+ Length   :31   Min.   :-114.3   Min.   :23.29   Min.   : 9.00  
+ N.unique :31   1st Qu.:-113.1   1st Qu.:24.95   1st Qu.:16.00  
+ N.blank  : 0   Median :-112.0   Median :26.64   Median :21.00  
+ Min.nchar: 1   Mean   :-112.0   Mean   :26.44   Mean   :25.68  
+ Max.nchar: 5   3rd Qu.:-110.8   3rd Qu.:27.78   3rd Qu.:31.50  
+                Max.   :-109.3   Max.   :29.33   Max.   :64.00  
     Females       Suitability        MFRatio        GenVarArapat   
  Min.   : 5.00   Min.   :0.0563   Min.   :0.5938   Min.   :0.0500  
  1st Qu.:15.50   1st Qu.:0.2732   1st Qu.:0.8778   1st Qu.:0.1392  
@@ -607,12 +607,12 @@ dbl (8): Males, Females, Suitability, MFRatio, GenVarArapat, GenVarEuphli, L...
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>( <span class="sc">~</span>Longitude, <span class="sc">~</span>Latitude, <span class="at">popup =</span> <span class="sc">~</span>Label ) <span class="sc">|&gt;</span></span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>( <span class="st">"OpenTopoMap"</span> )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-18ce3221442be5635d87" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-18ce3221442be5635d87">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addMarkers","args":[[23.2855,24.00789,24.0195,24.13389,24.2115,24.21441,24.58843,24.87611,25.0247,25.34819,25.55757,25.60521,25.91409,26.0155,26.20876,26.63783,26.94589,27.0367,27.18232,27.2028,27.3632,27.40498,27.52944,28.03661,28.22308,28.40846,28.66056,28.72796,28.96651,29.01457,29.32541],[-110.10429,-109.85071,-110.096,-110.46236,-110.951,-110.27252,-110.74599,-110.69175,-111.675,-111.60056,-111.21563,-111.32638,-112.08062,-111.35475,-111.37833,-109.327,-112.04613,-112.986,-112.66552,-112.408,-112.964,-112.52959,-113.31609,-113.39991,-113.18263,-112.86985,-113.99141,-113.48973,-113.66787,-113.94486,-114.29353],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<b>Site: Aqu <\/b><hr>\nFemales: 9 <br>Males:  12 <br>Suitability: 0.7217","<b>Site: 73 <\/b><hr>\nFemales: 5 <br>Males:  11 <br>Suitability: 0.1455","<b>Site: 157 <\/b><hr>\nFemales: 30 <br>Males:  26 <br>Suitability: 0.881","<b>Site: 153 <\/b><hr>\nFemales: 41 <br>Males:  35 <br>Suitability: 0.7325","<b>Site: 163 <\/b><hr>\nFemales: 21 <br>Males:  21 <br>Suitability: 0.4329","<b>Site: 48 <\/b><hr>\nFemales: 27 <br>Males:  18 <br>Suitability: 0.6195","<b>Site: 75 <\/b><hr>\nFemales: 18 <br>Males:  16 <br>Suitability: 0.8656","<b>Site: 77 <\/b><hr>\nFemales: 16 <br>Males:  19 <br>Suitability: 0.4226","<b>Site: const <\/b><hr>\nFemales: 11 <br>Males:  18 <br>Suitability: 0.1744","<b>Site: 51 <\/b><hr>\nFemales: 11 <br>Males:  9 <br>Suitability: 0.4125","<b>Site: 168 <\/b><hr>\nFemales: 25 <br>Males:  28 <br>Suitability: 0.4965","<b>Site: 64 <\/b><hr>\nFemales: 19 <br>Males:  16 <br>Suitability: 0.2876","<b>Site: 166 <\/b><hr>\nFemales: 26 <br>Males:  19 <br>Suitability: 0.2673","<b>Site: 58 <\/b><hr>\nFemales: 9 <br>Males:  11 <br>Suitability: 0.9019","<b>Site: 169 <\/b><hr>\nFemales: 28 <br>Males:  47 <br>Suitability: 0.3132","<b>Site: 32 <\/b><hr>\nFemales: 27 <br>Males:  40 <br>Suitability: 0.0563","<b>Site: 93 <\/b><hr>\nFemales: 21 <br>Males:  25 <br>Suitability: 0.1627","<b>Site: 161 <\/b><hr>\nFemales: 63 <br>Males:  64 <br>Suitability: 0.2791","<b>Site: 12 <\/b><hr>\nFemales: 21 <br>Males:  24 <br>Suitability: 0.3519","<b>Site: 162 <\/b><hr>\nFemales: 41 <br>Males:  57 <br>Suitability: 0.6136","<b>Site: sfran <\/b><hr>\nFemales: 16 <br>Males:  26 <br>Suitability: 0.3211","<b>Site: 160 <\/b><hr>\nFemales: 36 <br>Males:  48 <br>Suitability: 0.3652","<b>Site: 159 <\/b><hr>\nFemales: 15 <br>Males:  22 <br>Suitability: 0.188","<b>Site: 89 <\/b><hr>\nFemales: 19 <br>Males:  18 <br>Suitability: 0.3975","<b>Site: 171 <\/b><hr>\nFemales: 39 <br>Males:  38 <br>Suitability: 0.4614","<b>Site: 173 <\/b><hr>\nFemales: 32 <br>Males:  19 <br>Suitability: 0.5243","<b>Site: 177 <\/b><hr>\nFemales: 50 <br>Males:  49 <br>Suitability: 0.2618","<b>Site: 175 <\/b><hr>\nFemales: 8 <br>Males:  13 <br>Suitability: 0.4214","<b>Site: 84 <\/b><hr>\nFemales: 17 <br>Males:  13 <br>Suitability: 0.3953","<b>Site: 9 <\/b><hr>\nFemales: 10 <br>Males:  11 <br>Suitability: 0.5641","<b>Site: 88 <\/b><hr>\nFemales: 18 <br>Males:  23 <br>Suitability: 0.2186"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addProviderTiles","args":["OpenTopoMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]}],"limits":{"lat":[23.2855,29.32541],"lng":[-114.29353,-109.327]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-ede6d87b8e3670ee156e" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-ede6d87b8e3670ee156e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addMarkers","args":[[23.2855,24.00789,24.0195,24.13389,24.2115,24.21441,24.58843,24.87611,25.0247,25.34819,25.55757,25.60521,25.91409,26.0155,26.20876,26.63783,26.94589,27.0367,27.18232,27.2028,27.3632,27.40498,27.52944,28.03661,28.22308,28.40846,28.66056,28.72796,28.96651,29.01457,29.32541],[-110.10429,-109.85071,-110.096,-110.46236,-110.951,-110.27252,-110.74599,-110.69175,-111.675,-111.60056,-111.21563,-111.32638,-112.08062,-111.35475,-111.37833,-109.327,-112.04613,-112.986,-112.66552,-112.408,-112.964,-112.52959,-113.31609,-113.39991,-113.18263,-112.86985,-113.99141,-113.48973,-113.66787,-113.94486,-114.29353],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<b>Site: Aqu <\/b><hr>\nFemales: 9 <br>Males:  12 <br>Suitability: 0.7217","<b>Site: 73 <\/b><hr>\nFemales: 5 <br>Males:  11 <br>Suitability: 0.1455","<b>Site: 157 <\/b><hr>\nFemales: 30 <br>Males:  26 <br>Suitability: 0.881","<b>Site: 153 <\/b><hr>\nFemales: 41 <br>Males:  35 <br>Suitability: 0.7325","<b>Site: 163 <\/b><hr>\nFemales: 21 <br>Males:  21 <br>Suitability: 0.4329","<b>Site: 48 <\/b><hr>\nFemales: 27 <br>Males:  18 <br>Suitability: 0.6195","<b>Site: 75 <\/b><hr>\nFemales: 18 <br>Males:  16 <br>Suitability: 0.8656","<b>Site: 77 <\/b><hr>\nFemales: 16 <br>Males:  19 <br>Suitability: 0.4226","<b>Site: const <\/b><hr>\nFemales: 11 <br>Males:  18 <br>Suitability: 0.1744","<b>Site: 51 <\/b><hr>\nFemales: 11 <br>Males:  9 <br>Suitability: 0.4125","<b>Site: 168 <\/b><hr>\nFemales: 25 <br>Males:  28 <br>Suitability: 0.4965","<b>Site: 64 <\/b><hr>\nFemales: 19 <br>Males:  16 <br>Suitability: 0.2876","<b>Site: 166 <\/b><hr>\nFemales: 26 <br>Males:  19 <br>Suitability: 0.2673","<b>Site: 58 <\/b><hr>\nFemales: 9 <br>Males:  11 <br>Suitability: 0.9019","<b>Site: 169 <\/b><hr>\nFemales: 28 <br>Males:  47 <br>Suitability: 0.3132","<b>Site: 32 <\/b><hr>\nFemales: 27 <br>Males:  40 <br>Suitability: 0.0563","<b>Site: 93 <\/b><hr>\nFemales: 21 <br>Males:  25 <br>Suitability: 0.1627","<b>Site: 161 <\/b><hr>\nFemales: 63 <br>Males:  64 <br>Suitability: 0.2791","<b>Site: 12 <\/b><hr>\nFemales: 21 <br>Males:  24 <br>Suitability: 0.3519","<b>Site: 162 <\/b><hr>\nFemales: 41 <br>Males:  57 <br>Suitability: 0.6136","<b>Site: sfran <\/b><hr>\nFemales: 16 <br>Males:  26 <br>Suitability: 0.3211","<b>Site: 160 <\/b><hr>\nFemales: 36 <br>Males:  48 <br>Suitability: 0.3652","<b>Site: 159 <\/b><hr>\nFemales: 15 <br>Males:  22 <br>Suitability: 0.188","<b>Site: 89 <\/b><hr>\nFemales: 19 <br>Males:  18 <br>Suitability: 0.3975","<b>Site: 171 <\/b><hr>\nFemales: 39 <br>Males:  38 <br>Suitability: 0.4614","<b>Site: 173 <\/b><hr>\nFemales: 32 <br>Males:  19 <br>Suitability: 0.5243","<b>Site: 177 <\/b><hr>\nFemales: 50 <br>Males:  49 <br>Suitability: 0.2618","<b>Site: 175 <\/b><hr>\nFemales: 8 <br>Males:  13 <br>Suitability: 0.4214","<b>Site: 84 <\/b><hr>\nFemales: 17 <br>Males:  13 <br>Suitability: 0.3953","<b>Site: 9 <\/b><hr>\nFemales: 10 <br>Males:  11 <br>Suitability: 0.5641","<b>Site: 88 <\/b><hr>\nFemales: 18 <br>Males:  23 <br>Suitability: 0.2186"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addProviderTiles","args":["OpenTopoMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]}],"limits":{"lat":[23.2855,29.32541],"lng":[-114.29353,-109.327]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Make sure to click on one of the markers and see the popup information that we added <em>en route</em> via that mutate and some HTML code.</p>
-<p>In this case, we are using the latitude and longitude as numerical values of which the <code>leaflet</code> library is able to intrepret properly. However, just like we did for <a href="https://dyerlab.github.io/ENVS-Lectures/r_language/dates/slides.html#1">date-like data</a>, we can convert these into a geographically relevant data type that knows a lot about geospatial processes rather than keeping it as a numeric value that we “assume” will work properly. For this we will use the <code>sf</code> library.</p>
+<p>In this case, we are using the latitude and longitude as numerical values of which the <code>leaflet</code> library is able to interpret properly. However, just like we did for <a href="https://dyerlab.github.io/ENVS-Lectures/r_language/dates/slides.html#1">date-like data</a>, we can convert these into a geographically relevant data type that knows a lot about geospatial processes rather than keeping it as a numeric value that we “assume” will work properly. For this we will use the <code>sf</code> library.</p>
 <section id="sf-objects" class="level2">
 <h2 class="anchored" data-anchor-id="sf-objects"><code>sf</code> Objects</h2>
 <p><em>Simple Features</em> (hereafter abbreviated as <code>sf</code>) are an open standard developed by the Open Geospatial Consortium (<a href="https://ogc.org">OGC</a>). They define the following basic types:</p>
@@ -659,7 +659,7 @@ Geodetic CRS:  WGS 84
 <pre><code>[1] "sf"         "tbl_df"     "tbl"        "data.frame"</code></pre>
 </div>
 </div>
-<p>This additional <code>sf</code> attributes gives it more qualities such as a bounding box (e.g., the area within which all the poitns exist)</p>
+<p>These additional <code>sf</code> attributes give it more qualities such as a bounding box (e.g., the area within which all the points exist)</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_bbox</span>( data )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -676,7 +676,7 @@ Geodetic CRS:  WGS 84
 [1,] 84376.8</code></pre>
 </div>
 </div>
-<p>As well as complex geospatial operations such as finding the convex hull (the minimal area containing all poitns).</p>
+<p>As well as complex geospatial operations such as finding the convex hull (the minimal area containing all points).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_union</span>() <span class="sc">|&gt;</span></span>
@@ -693,7 +693,7 @@ Geodetic CRS:  WGS 84</code></pre>
 <pre><code>POLYGON ((-114.2935 29.32541, -113.9914 28.6605...</code></pre>
 </div>
 </div>
-<p>the center of the all the points.</p>
+<p>The center of all the points.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>hull <span class="sc">|&gt;</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_centroid</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -708,11 +708,11 @@ Geodetic CRS:  WGS 84</code></pre>
 <pre><code>POINT (-111.3417 26.37741)</code></pre>
 </div>
 </div>
-<p>and the area enclosed by all the points (for various units).</p>
+<p>And the area enclosed by all the points (for various units).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( units )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>udunits database from /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/units/share/udunits/udunits2.xml</code></pre>
+<pre><code>udunits database from /Library/Frameworks/R.framework/Versions/4.6/Resources/library/units/share/udunits/udunits2.xml</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>hull <span class="sc">|&gt;</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_area</span>() <span class="sc">|&gt;</span></span>
@@ -723,7 +723,7 @@ Geodetic CRS:  WGS 84</code></pre>
 </div>
 <section id="reprojecting" class="level3">
 <h3 class="anchored" data-anchor-id="reprojecting">Reprojecting</h3>
-<p>In addition to the operations above, properly created <code>sf</code> objects can easily be projected from one CRS into another (epsg 6372 is a common projection covering Mexico based upon the GRS80 elipsoid and the latest ITRF2008 datum standard based on the meter)<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
+<p>In addition to the operations above, properly created <code>sf</code> objects can easily be projected from one CRS into another (epsg 6372 is a common projection covering Mexico based upon the GRS80 ellipsoid and the latest ITRF2008 datum standard based on the meter)<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>( <span class="dv">6372</span> ) <span class="sc">|&gt;</span></span>
@@ -738,7 +738,7 @@ Geodetic CRS:  WGS 84</code></pre>
 <section id="plotting-sf-objects" class="level3">
 <h3 class="anchored" data-anchor-id="plotting-sf-objects">Plotting <code>sf</code> Objects</h3>
 <p>Analogous to the duality between built-in <code>R</code> plotting and <code>ggplot</code> approaches, we can use either of these frameworks to plot <code>sf</code> objects.</p>
-<p>As built-in objects, a <code>sf</code> data set that has a geometry coordinate is intrinsically linked to all the other data columns. If we plot the entire data frame, we see that for each non-geometry data column, we create an individual plot.</p>
+<p>As built-in objects, an <code>sf</code> data set that has a geometry coordinate is intrinsically linked to all the other data columns. If we plot the entire data frame, we see that for each non-geometry data column, we create an individual plot.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( data )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -760,7 +760,7 @@ Geodetic CRS:  WGS 84</code></pre>
 </div>
 </div>
 </div>
-<p>But if we plot it using the square brackets and names of dat columns, we can link the <code>geometry</code> column to it and plot it as a spatial representation of those data (and adorn it with the normal <code>plot()</code> upgrades accordingly).</p>
+<p>But if we plot it using the square brackets and names of data columns, we can link the <code>geometry</code> column to it and plot it as a spatial representation of those data (and adorn it with the normal <code>plot()</code> upgrades accordingly).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( data[<span class="st">"Suitability"</span>], <span class="at">pch=</span><span class="dv">16</span>, <span class="at">cex=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -771,7 +771,7 @@ Geodetic CRS:  WGS 84</code></pre>
 </div>
 </div>
 </div>
-<p>Perhaps not surprisingly, <code>ggplot()</code> also works the same way, however, the geospatial coordiantes for the plot aare taken care of using <code>geom_sf()</code> and you are left with definining which of the data columns you want to put into the plot as a component of the <code>aes()</code> definition.</p>
+<p>Perhaps not surprisingly, <code>ggplot()</code> also works the same way, however, the geospatial coordinates for the plot are taken care of using <code>geom_sf()</code> and you are left with defining which of the data columns you want to put into the plot as a component of the <code>aes()</code> definition.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( data, <span class="fu">aes</span>(<span class="at">color=</span>Suitability) ) <span class="sc">+</span> </span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>( )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -783,7 +783,7 @@ Geodetic CRS:  WGS 84</code></pre>
 </div>
 </div>
 </div>
-<p>It works the same ways for lables.</p>
+<p>It works the same way for labels.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>( data ) <span class="sc">+</span> </span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>( <span class="fu">aes</span>(<span class="at">label=</span>Site) ) <span class="sc">+</span> </span>
@@ -806,7 +806,7 @@ give correct results for longitude/latitude data</code></pre>
 </section>
 <section id="map-overlays" class="level1">
 <h1>Map Overlays</h1>
-<p>We can go out and grab a map background to overlay these plots onto, giving more context (similiarly to how we did this above using leaflet).</p>
+<p>We can go out and grab a map background to overlay these plots onto, giving more context (similarly to how we did this above using leaflet).</p>
 <p>The <code>map_data()</code> function is part of <code>ggplot()</code> and produces a <code>data.frame</code> object where each row is a coordinate used to draw polygons (see <a href="https://dyerlab.github.io/ENVS-Lectures/spatial/spatial_polygons/narrative.nb.html">narrative</a> on polygons for more information).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_data</span>(<span class="st">"world"</span>) <span class="sc">|&gt;</span></span>
@@ -822,7 +822,7 @@ give correct results for longitude/latitude data</code></pre>
 6 -91.53672 18.76001   970 60736 Mexico Isla del Carmen</code></pre>
 </div>
 </div>
-<p>In <code>ggplot</code> there is a <code>geom_polygon()</code> function that takes these series of coordiantes and draws them properly over which we can lay down the <code>sf</code> object.</p>
+<p>In <code>ggplot</code> there is a <code>geom_polygon()</code> function that takes this series of coordinates and draws them properly over which we can lay down the <code>sf</code> object.</p>
 <p>However, notice that the boundary boxes for the data and the map are vastly different (the underlying map is much bigger).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>( <span class="at">Data =</span> <span class="fu">st_bbox</span>( data ), <span class="at">Map =</span> <span class="fu">c</span>(<span class="fu">min</span>(map<span class="sc">$</span>long), <span class="fu">min</span>(map<span class="sc">$</span>lat), <span class="fu">max</span>(map<span class="sc">$</span>long), <span class="fu">max</span>(map<span class="sc">$</span>lat) ) )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -887,10 +887,10 @@ ymax   29.32541   32.71533</code></pre>
 
 <ol>
 <li id="fn1"><p><a href="https://doi.org/10.1002/9781118786352.wbieg1011">Tobler, W. R. 1970. <em>Economic Geography</em>, <strong>46</strong>, 234–240.</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Translation from one CRS to another in <em>all GIS software</em> is handled by the open source <a href="https://prog.org">proj.org</a> library.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>The EPSG standard was originally created in 1985 by the <a href="European%20Petroleum%20Survey%20Group">https://en.wikipedia.org/wiki/European_Petroleum_Survey_Group</a> and made public in 1993.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Translation from one CRS to another in <em>all GIS software</em> is handled by the open source <a href="https://proj.org">proj.org</a> library.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The EPSG standard was originally created in 1985 by the <a href="https://en.wikipedia.org/wiki/European_Petroleum_Survey_Group">European Petroleum Survey Group</a> and made public in 1993.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>This standard is defined by <a href="https://www.inegi.org.mx">Sistema Nacional de Información Estadística y Geográfica</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>This is because if we use the normal procedures, we mess up the order in which everything is plot in <code>geom_polygon()</code>, try it and see.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>This is because if we use the normal procedures, we mess up the order in which everything is plotted in <code>geom_polygon()</code>, try it and see.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->

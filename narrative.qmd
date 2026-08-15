@@ -67,7 +67,7 @@ To examine the differences between ellipsoids, let's load in some data first.  H
 states <- map_data("state")
 head( states )
 ```
-Each row is a point that is associated with a group (in this case the state) and is plot in a specific order (to make the outline of the state).  There are `r format(nrow(states), big.mark=",")` points required to make the plot, with the following `r length( unique( states$region) )` regions.
+Each row is a point that is associated with a group (in this case the state) and is plotted in a specific order (to make the outline of the state).  There are `r format(nrow(states), big.mark=",")` points required to make the plot, with the following `r length( unique( states$region) )` regions.
 
 ```{r}
 unique( states$region )
@@ -91,13 +91,13 @@ ggplot( states, aes( x = long,
 
 ### Azimuth Projections
 
-An Azimuth Projection is one that is formed by a 2-dimensional plane that is tangential to the surface of the earth at example one point.  This point may be polar (north or south pole) or oblique (e.g., over Richmond, Virginia).
+An Azimuth Projection is one that is formed by a 2-dimensional plane that is tangential to the surface of the earth at exactly one point.  This point may be polar (north or south pole) or oblique (e.g., over Richmond, Virginia).
 
 <center>
 ![Azequidistant](https://live.staticflickr.com/65535/50437120363_d8e0686d38_w_d.jpg)
 </center>
 
-We can apply different ellipsoids to the map *when we plot it* by adjusting the coordinate space it is plot within using the `coord_map()` modification.  For a whole list of available projections, see `?mapproject`.
+We can apply different ellipsoids to the map *when we plot it* by adjusting the coordinate space it is plotted within using the `coord_map()` modification.  For a whole list of available projections, see `?mapproject`.
 
 
 ```{r}
@@ -119,7 +119,7 @@ p + coord_map("cylindrical")
 
 ### Conic Projections
 
-Conic projections are symmetric around the prime meridian and all parallels are segments of conecntric circles.
+Conic projections are symmetric around the prime meridian and all parallels are segments of concentric circles.
 
 <center>![Conic Projection](https://live.staticflickr.com/65535/50437120428_6da48bed81_w_d.jpg)</center>
 
@@ -130,15 +130,15 @@ p + coord_map( "conic", lat0 = 30)
 
 ## Datum
 
-Once we have an ellipsoid model to work with we must define a *DATUM* type that will represent the coordiante system used.  Two common DATUM types include:  
+Once we have an ellipsoid model to work with we must define a *DATUM* type that will represent the coordinate system used.  Two common DATUM types include:  
 
 
 - *Longitude & Latitude* - The East/West & North/South position on the surface of the earth.
-  - Prime Meridian (0° Longitude) passes thorugh the [Royal Observatory](https://en.wikipedia.org/wiki/Royal_Observatory,_Greenwich) in Greenwich England, with positive values of longitude to the east and negative to the west.
-  - Equator (0° Latitude) and is defined as the point on the planet where both northern and southern hemisphers have equal amounts of day and night at the [equinox](https://en.wikipedia.org/wiki/Equinox) (Sept. 21 & March 21).
+  - Prime Meridian (0° Longitude) passes through the [Royal Observatory](https://en.wikipedia.org/wiki/Royal_Observatory,_Greenwich) in Greenwich England, with positive values of longitude to the east and negative to the west.
+  - Equator (0° Latitude) is defined as the point on the planet where both northern and southern hemispheres have equal amounts of day and night at the [equinox](https://en.wikipedia.org/wiki/Equinox) (Sept. 21 & March 21).
   - Richmond, Virginia: 37.533333 Latitude, -77.466667 Longitude
 
-- *Universal Trans Mercator* - A division of the earth into 60 zones (~6°longitude each, labeled 01 - 60) and 20 bands each of which is ~8° latitude (labeled C-X excluding I & O with A & B dividing up Antartica).  See image [here](https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#/media/File:Universal_Transverse_Mercator_zones.svg).
+- *Universal Transverse Mercator* - A division of the earth into 60 zones (~6°longitude each, labeled 01 - 60) and 20 bands each of which is ~8° latitude (labeled C-X excluding I & O with A & B dividing up Antarctica).  See image [here](https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#/media/File:Universal_Transverse_Mercator_zones.svg).
   - Coordinates include Zone & band designation as well as coordinates in Easting and Northing (planar coordinates within the zone) measured in meters.
   - Richmond, Virginia: 18S 282051 4156899
 
@@ -155,7 +155,7 @@ One of the repositories for these projections can be found at [epsg.io](https://
 
 [![epsg.io](https://live.staticflickr.com/65535/50445538736_bc1c3456e5_k_d.jpg)](https://epsg.io)
 
-The EPSG Geodetic Parameter Dataset (also known as the EPGS[^3] registry) is a publc registry of datums, spatial reference systems, and earth elipsoids.  Each item is assigned a specific EPSG code
+The EPSG Geodetic Parameter Dataset (also known as the EPSG[^3] registry) is a public registry of datums, spatial reference systems, and earth ellipsoids.  Each item is assigned a specific EPSG code.
 
 
 The precise definitions of projections come in several different formats, some of which include:
@@ -204,7 +204,7 @@ To start off, we will load in some data from the bark beetle, *Araptus attenuatu
 </tr>
 </table>
 
-As part of some work that we have done on these species, we have looked at the relationship between habitat suitability and sex ratio bias.  The life history for this beetle is such that males will establish home by burrowing in the senescing tissues of the host plant.  Once established, feamles are attracted via phermones.  
+As part of some work that we have done on these species, we have looked at the relationship between habitat suitability and sex ratio bias.  The life history for this beetle is such that males will establish a home by burrowing in the senescing tissues of the host plant.  Once established, females are attracted via pheromones.
 
 ```{r}
 url <- "https://raw.githubusercontent.com/dyerlab/ENVS-Lectures/master/data/Araptus_Disperal_Bias.csv"
@@ -239,7 +239,7 @@ data |>
 ```
 Make sure to click on one of the markers and see the popup information that we added *en route* via that mutate and some HTML code.
 
-In this case, we are using the latitude and longitude as numerical values of which the `leaflet` library is able to intrepret properly.  However, just like we did for [date-like data](https://dyerlab.github.io/ENVS-Lectures/r_language/dates/slides.html#1), we can convert these into a geographically relevant data type that knows a lot about geospatial processes rather than keeping it as a numeric value that we "assume" will work properly.  For this we will use the `sf` library.
+In this case, we are using the latitude and longitude as numerical values of which the `leaflet` library is able to interpret properly.  However, just like we did for [date-like data](https://dyerlab.github.io/ENVS-Lectures/r_language/dates/slides.html#1), we can convert these into a geographically relevant data type that knows a lot about geospatial processes rather than keeping it as a numeric value that we "assume" will work properly.  For this we will use the `sf` library.
 
 ## `sf` Objects
 
@@ -269,7 +269,7 @@ This conversion to an `sf` object adds attributes to the `data.frame` and `tibbl
 class( data )
 ```
 
-This additional `sf` attributes gives it more qualities such as a bounding box (e.g., the area within which all the poitns exist)
+These additional `sf` attributes give it more qualities such as a bounding box (e.g., the area within which all the points exist)
 
 ```{r}
 st_bbox( data )
@@ -281,7 +281,7 @@ Distances between objects.
 st_distance( data[1,], data[2,])
 ```
 
-As well as complex geospatial operations such as finding the convex hull (the minimal area containing all poitns).
+As well as complex geospatial operations such as finding the convex hull (the minimal area containing all points).
 
 ```{r}
 data |>
@@ -290,14 +290,14 @@ data |>
 hull
 ```
 
-the center of the all the points.
+The center of all the points.
 
 ```{r}
 hull |>
   st_centroid()
 ```
 
-and the area enclosed by all the points (for various units).
+And the area enclosed by all the points (for various units).
 
 ```{r}
 library( units )
@@ -309,7 +309,7 @@ hull |>
 
 ### Reprojecting
 
-In addition to the operations above, properly created `sf` objects can easily be projected from one CRS into another (epsg 6372 is a common projection covering  Mexico based upon the GRS80 elipsoid and the latest ITRF2008 datum standard based on the meter)[^4].
+In addition to the operations above, properly created `sf` objects can easily be projected from one CRS into another (epsg 6372 is a common projection covering  Mexico based upon the GRS80 ellipsoid and the latest ITRF2008 datum standard based on the meter)[^4].
 
 ```{r}
 data |>
@@ -324,7 +324,7 @@ Again, do this **first** to all your data to make sure it is put into a proper p
 
 Analogous to the duality between built-in `R` plotting and `ggplot` approaches, we can use either of these frameworks to plot `sf` objects.
 
-As built-in objects, a `sf` data set that has a geometry coordinate is intrinsically linked to all the other data columns.  If we plot the entire data frame, we see that for each non-geometry data column, we create an individual plot.
+As built-in objects, an `sf` data set that has a geometry coordinate is intrinsically linked to all the other data columns.  If we plot the entire data frame, we see that for each non-geometry data column, we create an individual plot.
 
 ```{r}
 plot( data )
@@ -336,20 +336,20 @@ The data with the `data.frame` can be accessed as normal.
 plot( data$Suitability )
 ```
 
-But if we plot it using the square brackets and names of dat columns, we can link the `geometry` column to it and plot it as a spatial representation of those data (and adorn it with the normal `plot()` upgrades accordingly).
+But if we plot it using the square brackets and names of data columns, we can link the `geometry` column to it and plot it as a spatial representation of those data (and adorn it with the normal `plot()` upgrades accordingly).
 
 ```{r}
 plot( data["Suitability"], pch=16, cex=2)
 ```
 
-Perhaps not surprisingly, `ggplot()` also works the same way, however, the geospatial coordiantes for the plot aare taken care of using `geom_sf()` and you are left with definining which of the data columns you want to put into the plot as a component of the `aes()` definition.
+Perhaps not surprisingly, `ggplot()` also works the same way, however, the geospatial coordinates for the plot are taken care of using `geom_sf()` and you are left with defining which of the data columns you want to put into the plot as a component of the `aes()` definition.
 
 ```{r}
 ggplot( data, aes(color=Suitability) ) + 
   geom_sf( )
 ```
 
-It works the same ways for lables.
+It works the same way for labels.
 
 ```{r}
 ggplot( data ) + 
@@ -362,7 +362,7 @@ ggplot( data ) +
 
 # Map Overlays
 
-We can go out and grab a map background to overlay these plots onto, giving more context (similiarly to how we did this above using leaflet). 
+We can go out and grab a map background to overlay these plots onto, giving more context (similarly to how we did this above using leaflet).
 
 The `map_data()` function is part of `ggplot()` and produces a `data.frame` object where each row is a coordinate used to draw polygons (see [narrative](https://dyerlab.github.io/ENVS-Lectures/spatial/spatial_polygons/narrative.nb.html) on polygons for more information).
 
@@ -371,7 +371,7 @@ map_data("world") |>
   filter( region == "Mexico") -> map
 head( map )
 ```
-In `ggplot` there is a `geom_polygon()` function that takes these series of coordiantes and draws them properly over which we can lay down the `sf` object.  
+In `ggplot` there is a `geom_polygon()` function that takes this series of coordinates and draws them properly over which we can lay down the `sf` object.
 
 However, notice that the boundary boxes for the data and the map are vastly different (the underlying map is much bigger).
 
@@ -425,10 +425,10 @@ ggplot( ) +
 
 [^1]: [Tobler, W. R. 1970. *Economic Geography*, **46**, 234–240.](https://doi.org/10.1002/9781118786352.wbieg1011)
 
-[^2]: Translation from one CRS to another in *all GIS software* is handled by the open source [proj.org](https://prog.org) library.
+[^2]: Translation from one CRS to another in *all GIS software* is handled by the open source [proj.org](https://proj.org) library.
 
-[^3]: The EPSG standard was originally created in 1985 by the [https://en.wikipedia.org/wiki/European_Petroleum_Survey_Group](European Petroleum Survey Group) and made public in 1993.
+[^3]: The EPSG standard was originally created in 1985 by the [European Petroleum Survey Group](https://en.wikipedia.org/wiki/European_Petroleum_Survey_Group) and made public in 1993.
 
 [^4]: This standard is defined by [Sistema Nacional de Información Estadística y Geográfica](https://www.inegi.org.mx).
 
-[^5]: This is because if we use the normal procedures, we mess up the order in which everything is plot in `geom_polygon()`, try it and see.
+[^5]: This is because if we use the normal procedures, we mess up the order in which everything is plotted in `geom_polygon()`, try it and see.
