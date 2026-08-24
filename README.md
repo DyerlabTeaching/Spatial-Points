@@ -1,6 +1,6 @@
 # Spatial Point Data
 
-![Photo from <a href="https://unsplash.com/s/photos/map-flags?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>](https://github.com/DyerlabTeaching/Spatial-Points/raw/main/media/ru-recovery-ministries-zXM5Yl7MX5k-unsplash.jpg)
+![Photo by <a href="https://unsplash.com/@rurecoveryministries?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">RU Recovery Ministries</a> on <a href="https://unsplash.com/photos/zXM5Yl7MX5k?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>](https://github.com/DyerlabTeaching/Spatial-Points/raw/main/media/ru-recovery-ministries-zXM5Yl7MX5k-unsplash.jpg)
 
 ## Impetus
 
@@ -21,7 +21,7 @@ This topic is the first jump into geospatial analysis in `R`. There is a very hi
 > Learners will use `sf` and `ggplot` to visualize point data and create both static and dynamic maps.
 
 - **Bloom's Levels:** Apply, Create
-- **Reinforces:** Applies the `ggplot2` graphics skills from Graphics That Do Not Suck to a spatial context, using the Sonoran Desert bark beetle data set as a running example.
+- **Reinforces:** Applies the `ggplot2` graphics skills from [GGPlot2 Graphics](https://github.com/DyerlabTeaching/GGPlot2_Graphics) to a spatial context, using the Sonoran Desert bark beetle data set as a running example.
 - **Notes:** Covering both static and dynamic maps previews the range of output formats available for spatial work later in the course.
 
 ## Content
@@ -30,6 +30,14 @@ This topic is the first jump into geospatial analysis in `R`. There is a very hi
 - A longer [narrative](https://dyerlabteaching.github.io/Spatial-Points/narrative.html) going in more depth on the slide content.
 - The [in-class](https://dyerlabteaching.github.io/Spatial-Points/in-class.html) activity.
 - An `sf` [cheat sheet](https://github.com/rstudio/cheatsheets/raw/main/sf.pdf)
+
+## Assessment
+
+- A [homework](https://dyerlabteaching.github.io/Spatial-Points/homework.html) assignment on the topic.
+
+## Logistics
+
+- A [Teaching Log](https://dyerlabteaching.github.io/Spatial-Points/log.html) record of delivery and notes.
 
 ## Contact Information
 
